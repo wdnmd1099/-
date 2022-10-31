@@ -1,36 +1,35 @@
 const div1 = document.createElement("div");
-div1.setAttribute("id", "x1");
 div1.innerHTML = "1";
+div1.setAttribute("id", "x1");
+const view1 = document.createElement("div");
+view1.style.height = "50px";
+view1.style.backgroundColor = "red";
+div1.appendChild(view1);
+function div11() {
+    console.log("xxx");
+}
 const div2 = document.createElement("div");
 div2.setAttribute("id", "x2");
 div2.innerHTML = "2";
-const div3 = document.createElement("div");
-div3.setAttribute("id", "x3");
-div3.innerHTML = "3";
-const div4 = document.createElement("div");
-div4.setAttribute("id", "x4");
-div4.innerHTML = "4";
 const routeTable = {
-    "1": div1,
-    "2": div2,
-    "3": div3,
-    "4": div4
+    "/1": div1,
+    "/2": div2
 };
-console.log(routeTable);
+const app = document.querySelector(`#app`);
 let _number;
-function x1() {
-    const app = document.querySelector(`#app`);
-    const number = window.location.hash.substring(1) || 1;
-    if (_number == undefined) app.appendChild(document.body.appendChild(routeTable[number.toString()]));
+function x1(root) {
+    const number = window.location.pathname;
+    console.log(number);
+    if (_number == undefined) root.appendChild(document.body.appendChild(routeTable[number.toString()]));
     else if (_number !== number && _number !== undefined) {
-        app.innerHTML = "";
-        app.appendChild(document.body.appendChild(routeTable[number.toString()]));
+        root.innerHTML = "";
+        root.appendChild(document.body.appendChild(routeTable[number.toString()]));
     }
     _number = number;
 }
-x1();
+x1(app);
 window.addEventListener("hashchange", ()=>{
-    x1(), console.log("hash变了");
+    x1(app), console.log("hash变了");
 });
 
 //# sourceMappingURL=index.c4775257.js.map
